@@ -7,4 +7,8 @@ target 'FoodDeliveryApp' do
 
   # Pods for FoodDeliveryApp
 
+pod 'RxSwift'
+pod 'RxCocoa'
+pod 'Moya/RxSwift'
+
 end
