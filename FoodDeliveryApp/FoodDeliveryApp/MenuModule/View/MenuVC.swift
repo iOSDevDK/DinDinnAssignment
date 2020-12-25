@@ -35,6 +35,7 @@ class MenuVC: UIViewController {
     }
     
     private let menuVCCollectionViewCellIdentifier = "menuVCCollectionViewCellIdentifier"
+    private let segChildPageViewController = "segChildPageViewController"
     
     override func viewDidLoad() {
         super.viewDidLoad()
