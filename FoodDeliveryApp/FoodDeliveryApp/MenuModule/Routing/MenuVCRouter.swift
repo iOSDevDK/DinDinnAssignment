@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 class MenuVCRouter: PresenterToRouterProtocol {
-    var viewController: UIViewController?
-    
+        
     class func createModule() -> UIViewController {
         guard let view = mainStoryboard.instantiateViewController(identifier: "MenuVC") as? MenuVC else {
             return UIViewController()
@@ -33,9 +32,5 @@ class MenuVCRouter: PresenterToRouterProtocol {
         return UIStoryboard(name: "Main", bundle: Bundle.main)
     }
     
-    func displayCartView() {
-        let cartVC = CartVCRouter.createModule()
-          
-          viewController?.navigationController?.pushViewController(cartVC, animated: true)
-    }
+    
 }

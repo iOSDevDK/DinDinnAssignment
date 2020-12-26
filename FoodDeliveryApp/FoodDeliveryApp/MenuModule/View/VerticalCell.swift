@@ -18,7 +18,10 @@ class VerticalCell: UICollectionViewCell {
     @IBOutlet weak var ibButtonMenuItemPrice: UIButton!
     
     var menuItem : MenuVCModel?
+    var delegate: MenuItemToMenuControllerProtocol?
+    
 
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -29,6 +32,7 @@ class VerticalCell: UICollectionViewCell {
     }
     
     func setUpCell() {
+        
         if let item = menuItem {
                 self.ibLabelMenuItemName.text = item.name
                 self.ibTextViewMenuItemDescription.text = item.description!
@@ -38,5 +42,11 @@ class VerticalCell: UICollectionViewCell {
             
         }
     }
+    
+    @IBAction func btnMenuItemTapped(sender: UIButton) {
+        
+        if let item = menuItem {
+            delegate?.menuItemAddtoCard(menuItem: item)
+        }
+    }
 }
-

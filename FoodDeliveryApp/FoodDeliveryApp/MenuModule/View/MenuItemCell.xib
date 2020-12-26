@@ -71,6 +71,9 @@
                                                                 <real key="value" value="17.5"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnMenuItemTappedWithSender:" destination="clu-p9-WHO" eventType="touchUpInside" id="YWV-Wh-WdS"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

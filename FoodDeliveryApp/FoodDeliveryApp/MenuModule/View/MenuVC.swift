@@ -18,6 +18,8 @@ class MenuVC: UIViewController {
     @IBOutlet weak var ibScrollView : UIScrollView!
     @IBOutlet weak var ibHorizontalStackView : UIStackView!
     @IBOutlet weak var ibConstraintibHorizontalStackView : NSLayoutConstraint!
+    @IBOutlet weak var ibViewCartItemsCounter : UIView!
+    @IBOutlet weak var ibLabelCartItemsCount : UILabel!
     
     var swipeCollectionLeft : UISwipeGestureRecognizer!
     var swipeCollectionRight : UISwipeGestureRecognizer!
@@ -40,8 +42,21 @@ class MenuVC: UIViewController {
       }
     }
     var arrCartItems: [MenuVCModel] = [] {
+        willSet {
+            if arrCartItems.count == 0 {
+                ibViewCartItemsCounter.isHidden = true
+            } else {
+                ibViewCartItemsCounter.isHidden = false
+                ibLabelCartItemsCount.text = "\(arrCartItems.count)"
+            }
+        }
         didSet {
-            
+            if arrCartItems.count == 0 {
+                ibViewCartItemsCounter.isHidden = true
+            } else {
+                ibViewCartItemsCounter.isHidden = false
+                ibLabelCartItemsCount.text = "\(arrCartItems.count)"
+            }
         }
     }
     
@@ -50,12 +65,18 @@ class MenuVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ibViewCartItemsCounter.isHidden = true
         presenter?.updateView()
-        self.navigationController?.navigationBar.isHidden = true
+    
         
         setUpMenuVCCollectinUI()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        self.navigationController?.navigationBar.isHidden = true
     }
    
     func setUpHorizontalButtons() {
@@ -89,7 +110,21 @@ class MenuVC: UIViewController {
         ibcollectionViewMenu.addGestureRecognizer(swipeCollectionRight)
     }
 
+    @IBAction func buttonCartTapped(sender: UIButton) {
+        if arrCartItems.count > 0 {
+            self.performSegue(withIdentifier: "segCartVC", sender: arrCartItems)
+        }
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segCartVC" {
+            if let cartView = segue.destination as? CartVC {
+                if let cartItems = sender as? [MenuVCModel] {
+                    cartView.arrCartItems = cartItems
+                }
+            }
+        }
+    }
 }
 
 extension MenuVC: PresenterToViewProtocol {
@@ -225,10 +260,14 @@ extension MenuVC: MenuDelegate {
         //print("yPos = ",yPos)
         if yPos <= 330 {
             ibConstraintContainerTop.constant = -yPos
-            print(ibcollectionViewMenu.frame.size.height)
+            //print(ibcollectionViewMenu.frame.size.height)
             self.view.layoutIfNeeded()
         }
         ibcollectionViewMenu.reloadData()
         
+    }
+    
+    func addItemToCart(selectedMenuItem: MenuVCModel) {
+        arrCartItems.append(selectedMenuItem)
     }
 }

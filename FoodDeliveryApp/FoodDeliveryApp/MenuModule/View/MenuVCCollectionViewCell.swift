@@ -10,6 +10,8 @@ import UIKit
 protocol MenuDelegate {
     func displaySelectedMenuInfo(response: Any, idx : Int)
     func menuContentOffSet(yPos : CGFloat)
+    func addItemToCart(selectedMenuItem : MenuVCModel)
+    
 }
 
 extension MenuDelegate {
@@ -82,7 +84,7 @@ class MenuVCCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuItemCell", for: indexPath) as! VerticalCell
-            cell.backgroundColor = .systemTeal
+            cell.delegate = self
             cell.menuItem = arrItems[indexPath.row]
             cell.setUpCell()
             
@@ -131,4 +133,14 @@ class MenuVCCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource
             yContentOffSet = menuItemCollectionView.contentOffset.y
             menudelegate?.menuContentOffSet(yPos: menuItemCollectionView.contentOffset.y)
         }
+    
+}
+
+extension MenuVCCollectionViewCell: MenuItemToMenuControllerProtocol {
+    func menuItemAddtoCard(menuItem: MenuVCModel) {
+        menudelegate?.addItemToCart(selectedMenuItem: menuItem)
     }
+    
+    
+    
+}

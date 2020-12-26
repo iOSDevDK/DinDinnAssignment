@@ -69,6 +69,7 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kAM-g4-W43">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="466"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <gestureRecognizers/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ID8-r2-wMk">
                                             <size key="itemSize" width="321" height="408"/>
@@ -84,7 +85,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="321" height="408"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
-                                                <color key="backgroundColor" red="0.36078431370000003" green="0.60392156860000001" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" systemColor="systemTealColor"/>
                                                 <gestureRecognizers/>
                                             </collectionViewCell>
                                         </cells>
@@ -100,7 +101,7 @@
                                         <color key="currentPageIndicatorTintColor" red="1" green="0.88352052690000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </pageControl>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Uv2-Qn-3Oq" firstAttribute="trailing" secondItem="kAM-g4-W43" secondAttribute="trailing" id="1OL-46-OCU"/>
                                     <constraint firstAttribute="trailing" secondItem="kAM-g4-W43" secondAttribute="trailing" id="AMK-wL-8KP"/>
@@ -122,6 +123,9 @@
                                         <state key="normal">
                                             <imageReference key="image" image="cart" catalog="system" symbolScale="medium"/>
                                         </state>
+                                        <connections>
+                                            <action selector="buttonCartTappedWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rIK-Oh-bGH"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -188,16 +192,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gRv-MJ-LBm"/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="ibConstraintContainerHeight" destination="i5t-8R-mLD" id="rbd-vY-mUd"/>
                         <outlet property="ibConstraintContainerTop" destination="cn9-dj-oej" id="Knq-dT-RuN"/>
                         <outlet property="ibConstraintibHorizontalStackView" destination="SKf-gQ-AoW" id="WcI-Md-qfK"/>
                         <outlet property="ibHorizontalStackView" destination="e9c-5U-2b4" id="iOO-XO-Tih"/>
+                        <outlet property="ibLabelCartItemsCount" destination="uyZ-SJ-v9Q" id="T4r-W6-pc4"/>
                         <outlet property="ibScrollView" destination="yKS-52-bGV" id="y54-1h-wPK"/>
                         <outlet property="ibScrollViewContainer" destination="bAy-0h-jya" id="3bM-qE-oo1"/>
+                        <outlet property="ibViewCartItemsCounter" destination="ZFR-Ue-H7V" id="OBK-Ij-eZC"/>
                         <outlet property="ibcollectionViewMenu" destination="kAM-g4-W43" id="fdh-wo-pec"/>
                         <outlet property="pageControl" destination="Uv2-Qn-3Oq" id="U3t-Uh-iRT"/>
+                        <segue destination="8CY-aN-wLf" kind="show" identifier="segCartVC" id="U6I-N4-68j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -207,13 +213,15 @@
         <!--CartVC-->
         <scene sceneID="P3e-r8-Vse">
             <objects>
-                <viewController storyboardIdentifier="CartVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8CY-aN-wLf" customClass="CartVC" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CartVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8CY-aN-wLf" customClass="CartVC" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ADz-M6-Tui">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Whq-Au-TlZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="YWf-Rr-YoZ"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WhN-YE-sov" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

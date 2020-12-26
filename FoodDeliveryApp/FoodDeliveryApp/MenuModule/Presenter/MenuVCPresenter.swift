@@ -16,13 +16,11 @@ final class MenuVCPresenter: ViewToPresenterProtocol {
     func updateView() {
         interactor?.fetchMenuItems()
     }
+    
 }
 
 extension MenuVCPresenter: InteractorToPresenterProtocol {
     
-    func showCartItems(items: [MenuVCModel]) {
-        view?.showCartItems(items: items)
-    }
 
     func fetchMenu(items: [MenuVCModel]) {
         view?.showMenu(items: items)

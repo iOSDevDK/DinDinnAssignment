@@ -35,13 +35,6 @@ class MenuVCInteractor: PresenterToInteractorProtocol {
 
     }
     
-    func addToCart(menu item: MenuVCModel) {
-        
-    }
-    
-    func displayCartView(menuItems: MenuVCModel) {
-        
-    }
 }
 
 
