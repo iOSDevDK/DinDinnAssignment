@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 protocol PresenterToViewProtocol: class {
+    func showCartItems(items: [MenuVCModel])
     func showMenu(items: [MenuVCModel])
     func showError()
 }
@@ -21,6 +22,8 @@ protocol InteractorToPresenterProtocol: class {
 protocol PresenterToInteractorProtocol: class {
     var presenter: InteractorToPresenterProtocol? { get set }
     func fetchMenuItems()
+    func addToCart(menu item: MenuVCModel)
+    func displayCartView(menuItems: MenuVCModel)
 }
 
 protocol ViewToPresenterProtocol: class {

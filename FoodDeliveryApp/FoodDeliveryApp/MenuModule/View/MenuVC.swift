@@ -12,26 +12,37 @@ import RxCocoa
 class MenuVC: UIViewController {
     @IBOutlet weak var ibcollectionViewMenu : UICollectionView!
     @IBOutlet weak var pageControl : UIPageControl!
+    @IBOutlet weak var ibScrollViewContainer : UIView!
+    @IBOutlet weak var ibConstraintContainerHeight : NSLayoutConstraint!
+    @IBOutlet weak var ibConstraintContainerTop : NSLayoutConstraint!
+    @IBOutlet weak var ibScrollView : UIScrollView!
+    @IBOutlet weak var ibHorizontalStackView : UIStackView!
+    @IBOutlet weak var ibConstraintibHorizontalStackView : NSLayoutConstraint!
     
     var swipeCollectionLeft : UISwipeGestureRecognizer!
     var swipeCollectionRight : UISwipeGestureRecognizer!
     
     var presenter: ViewToPresenterProtocol?
+    var yContentOffSet : CGFloat = 0
+    
     var arrHeaderTitles : Set<String> = [] {
         didSet {
             print ("arrHeaderTitles = \(arrHeaderTitles)")
-            print("number of pages = ",arrHeaderTitles.count)
             self.pageControl.numberOfPages = arrHeaderTitles.count
+            setUpHorizontalButtons()
+            ibcollectionViewMenu.reloadData()
         }
     }
     
     var arrayMenuItems: [MenuVCModel] = [] {
       didSet {
-//        print("arrayMenuItems => ",arrayMenuItems)
-        
-        arrHeaderTitles = Set(arrayMenuItems.map{ $0.subCategory! }.reversed())
-        //ibcollectionViewMenu.reloadData()
+        arrHeaderTitles = Set(arrayMenuItems.map{ $0.subCategory! }.sorted(by: <))
       }
+    }
+    var arrCartItems: [MenuVCModel] = [] {
+        didSet {
+            
+        }
     }
     
     private let menuVCCollectionViewCellIdentifier = "menuVCCollectionViewCellIdentifier"
@@ -47,6 +58,19 @@ class MenuVC: UIViewController {
         
     }
    
+    func setUpHorizontalButtons() {
+        for title in arrHeaderTitles {
+            let button = UIButton(type: .custom)
+            button.setTitle(title, for: .normal)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.layer.masksToBounds = true
+            button.setTitleColor(.systemBlue, for: .normal)
+            ibHorizontalStackView.addArrangedSubview(button)
+        
+        }
+        self.view.layoutIfNeeded()
+    }
+    
     
     func setUpMenuVCCollectinUI() {
         
@@ -78,6 +102,9 @@ extension MenuVC: PresenterToViewProtocol {
         self.arrayMenuItems = items
     }
 
+    func showCartItems(items: [MenuVCModel]) {
+        self.arrCartItems = items
+    }
 }
   
 extension MenuVC : UIGestureRecognizerDelegate {
@@ -110,23 +137,21 @@ extension MenuVC : UIGestureRecognizerDelegate {
 
 extension MenuVC: UICollectionViewDataSource, UIScrollViewDelegate {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return arrHeaderTitles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "menuVCCollectionViewCellIdentifier", for: indexPath) as? MenuVCCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        cell.idxMainCell = indexPath.row
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "menuVCCollectionViewCellIdentifier", for: indexPath) as! MenuVCCollectionViewCell
+        
         cell.menudelegate = self
         cell.arrTitle = Array(arrHeaderTitles)
-
-        cell.appsCollectionView.reloadData()
+        cell.arrItems = arrayMenuItems
+        cell.yContentOffSet = 0 //-ibConstraintContainerTop.constant
         return cell
     }
     
@@ -141,9 +166,16 @@ extension MenuVC: UICollectionViewDataSource, UIScrollViewDelegate {
             pageControl.currentPage = visibleIndexPath!.item
             
         }
-        
+        for cell in ibcollectionViewMenu.visibleCells {
+            if let indexPath = ibcollectionViewMenu.indexPath(for: cell) {
+                if let currentCell = cell as? MenuVCCollectionViewCell {
+                    currentCell.idxMainCell = indexPath.item
+                }
+//                pageControl.currentPage = indexPath.item
+//                ibcollectionViewMenu.reloadData()
+            }
+        }
     }
-    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -188,4 +220,15 @@ extension MenuVC: MenuDelegate {
                 
     }
     
+    func menuContentOffSet(yPos: CGFloat) {
+        //print("ibConstraintContainerTop.constant = ",ibConstraintContainerHeight.constant)
+        //print("yPos = ",yPos)
+        if yPos <= 330 {
+            ibConstraintContainerTop.constant = -yPos
+            print(ibcollectionViewMenu.frame.size.height)
+            self.view.layoutIfNeeded()
+        }
+        ibcollectionViewMenu.reloadData()
+        
+    }
 }

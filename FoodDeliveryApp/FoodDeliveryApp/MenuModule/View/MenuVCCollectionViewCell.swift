@@ -9,6 +9,7 @@ import UIKit
 
 protocol MenuDelegate {
     func displaySelectedMenuInfo(response: Any, idx : Int)
+    func menuContentOffSet(yPos : CGFloat)
 }
 
 extension MenuDelegate {
@@ -32,79 +33,69 @@ class MenuVCCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource
         }
         
         var menudelegate : MenuDelegate?
-        var idxMainCell = 0
+    
+        var idxMainCell = 0 {
+            didSet {
+                arrItems = arrItems.filter{ $0.subCategory == arrTitle[idxMainCell] }
+                menuItemCollectionView.reloadData()
+            }
+        }
+    
+    var yContentOffSet : CGFloat = 0
+    
         var arrTitle = [String]()
-        var arrImages = [#imageLiteral(resourceName: "img_Languages")]
+        var arrItems : [MenuVCModel] = []
         
-        let appsCollectionView: UICollectionView = {
+        let menuItemCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .vertical //.horizontal
+            layout.scrollDirection = .vertical
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
             
             collectionView.backgroundColor = UIColor.clear
+            collectionView.showsVerticalScrollIndicator = false
             collectionView.translatesAutoresizingMaskIntoConstraints = false
-            
+
             return collectionView
         }()
         
         
         func setupViews() {
             backgroundColor = UIColor.clear
-            addSubview(appsCollectionView)
+            addSubview(menuItemCollectionView)
+
+            let nibPrefCell = UINib(nibName: "MenuItemCell", bundle: nil)
+            menuItemCollectionView.register(nibPrefCell, forCellWithReuseIdentifier: "MenuItemCell")
+
+            menuItemCollectionView.dataSource = self
+            menuItemCollectionView.delegate = self
             
-            appsCollectionView.dataSource = self
-            appsCollectionView.delegate = self
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": menuItemCollectionView]))
             
-            appsCollectionView.register(VerticalCell.self, forCellWithReuseIdentifier: "VerticalCell")
-            
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": appsCollectionView]))
-            
-            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": appsCollectionView]))
+            addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0": menuItemCollectionView]))
             
         }
         
         
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return arrTitle.count
+            return arrItems.count
         }
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VerticalCell", for: indexPath) as! VerticalCell
-            
-
-            let dictCellData = arrTitle[indexPath.row]
-            //cell.lblTitle.text = getValueFrmDict(dictReplace: dictCellData as! [String : AnyObject], key: "vSubject")
-            //let urlString = getValueFrmDict(dictReplace: dictCellData as! [String : AnyObject], key: "vImage")
-            
-//            if let url = URL(string: urlString ) {
-//                cell.vwImgCellIcon.contentMode = .scaleAspectFit
-//                cell.vwImgCellIcon.sd_setImage(with: url) { (image, error, imageCacheType, imageUrl) in
-//                    if image != nil {
-//                        //print("image found")
-//                    } else {
-//                    }
-//                }
-//            } else {
-//            }
-            
-            /*
-            if getDefaults(strKey: kRegCategory) != kLongue {
-                let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressedCell(_:)))
-                longPress.view?.tag = Int(indexPath.item)
-                longPress.minimumPressDuration = 1.0
-                cell.addGestureRecognizer(longPress)
-            }*/
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuItemCell", for: indexPath) as! VerticalCell
+            cell.backgroundColor = .systemTeal
+            cell.menuItem = arrItems[indexPath.row]
+            cell.setUpCell()
             
             return cell
         }
         
         func longPressedCell(_ sender: UILongPressGestureRecognizer) {
             if menudelegate != nil {
-                let point = sender.location(in: self.appsCollectionView)
-                let indexPath = self.appsCollectionView.indexPathForItem(at: point)
+                let point = sender.location(in: self.menuItemCollectionView)
+                let indexPath = self.menuItemCollectionView.indexPathForItem(at: point)
                 
                 if let index = indexPath {
-                    _ = self.appsCollectionView.cellForItem(at: index)
+                    _ = self.menuItemCollectionView.cellForItem(at: index)
                     // do stuff with your cell, for example print the indexPath
                     print(index.row)
                     
@@ -120,22 +111,24 @@ class MenuVCCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource
         func collectionView(_ collectionView: UICollectionView,
                             layout collectionViewLayout: UICollectionViewLayout,
                             sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: (UIScreen.main.bounds.size.width/2.0 - 40), height: (UIScreen.main.bounds.size.width/2.0 - 40))
+            return CGSize(width: (UIScreen.main.bounds.size.width), height: 426)
         }
         
         func collectionView(_ collectionView: UICollectionView, layout
             collectionViewLayout: UICollectionViewLayout,
                             minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return 20
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 20, left: UIScreen.main.bounds.size.width/2.0 - (UIScreen.main.bounds.size.width/2.0 - 20), bottom: 0, right: UIScreen.main.bounds.size.width/2.0 - (UIScreen.main.bounds.size.width/2.0 - 20))
+            return 0
         }
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             if menudelegate != nil {
                 
             }
+        }
+    
+        func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            //print("menuItemCollectionView.contentOffset.y = ",menuItemCollectionView.contentOffset.y)
+            yContentOffSet = menuItemCollectionView.contentOffset.y
+            menudelegate?.menuContentOffSet(yPos: menuItemCollectionView.contentOffset.y)
         }
     }

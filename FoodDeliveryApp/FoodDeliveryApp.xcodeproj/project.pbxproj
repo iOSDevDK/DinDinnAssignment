@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		594C2B4B360A0629E3098B59 /* Pods_FoodDeliveryApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0AA8B031AA3420574A8980 /* Pods_FoodDeliveryApp.framework */; };
+		8A0FF41C259748FB000F825B /* CartVCProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FF41B259748FB000F825B /* CartVCProtocols.swift */; };
+		8A0FF4202597490B000F825B /* CartVCRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0FF41F2597490B000F825B /* CartVCRouter.swift */; };
 		8A82F12B2595BDCD00D84A6D /* MenuVCCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F12A2595BDCD00D84A6D /* MenuVCCollectionViewCell.swift */; };
 		8A82F13B2595DCEB00D84A6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F13A2595DCEB00D84A6D /* SceneDelegate.swift */; };
 		8A82F1402595E21D00D84A6D /* MenuVCProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F13F2595E21D00D84A6D /* MenuVCProtocols.swift */; };
@@ -16,6 +18,7 @@
 		8A82F1772595FAAA00D84A6D /* MenuVCRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F1762595FAAA00D84A6D /* MenuVCRouter.swift */; };
 		8A82F1CC25962EBC00D84A6D /* VerticalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F1CB25962EBC00D84A6D /* VerticalCell.swift */; };
 		8A82F1DC2596596200D84A6D /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F1DB2596596200D84A6D /* PageViewController.swift */; };
+		8A82F1E825966BE300D84A6D /* MenuItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A82F1E725966BE300D84A6D /* MenuItemCell.xib */; };
 		8AA5A6C525946AC900556B44 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5A6C425946AC900556B44 /* MenuVC.swift */; };
 		8AA5A6C825946B0800556B44 /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5A6C725946B0800556B44 /* CartVC.swift */; };
 		8AA5A6CB25946B4F00556B44 /* CartVCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5A6CA25946B4F00556B44 /* CartVCPresenter.swift */; };
@@ -31,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		382300A77DF9BBC945F93B43 /* Pods-FoodDeliveryApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodDeliveryApp.release.xcconfig"; path = "Target Support Files/Pods-FoodDeliveryApp/Pods-FoodDeliveryApp.release.xcconfig"; sourceTree = "<group>"; };
+		8A0FF41B259748FB000F825B /* CartVCProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVCProtocols.swift; sourceTree = "<group>"; };
+		8A0FF41F2597490B000F825B /* CartVCRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVCRouter.swift; sourceTree = "<group>"; };
 		8A82F12A2595BDCD00D84A6D /* MenuVCCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVCCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A82F13A2595DCEB00D84A6D /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8A82F13F2595E21D00D84A6D /* MenuVCProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVCProtocols.swift; sourceTree = "<group>"; };
@@ -39,6 +44,7 @@
 		8A82F1762595FAAA00D84A6D /* MenuVCRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVCRouter.swift; sourceTree = "<group>"; };
 		8A82F1CB25962EBC00D84A6D /* VerticalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCell.swift; sourceTree = "<group>"; };
 		8A82F1DB2596596200D84A6D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		8A82F1E725966BE300D84A6D /* MenuItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuItemCell.xib; sourceTree = "<group>"; };
 		8AA5A6C425946AC900556B44 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		8AA5A6C725946B0800556B44 /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
 		8AA5A6CA25946B4F00556B44 /* CartVCPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVCPresenter.swift; sourceTree = "<group>"; };
@@ -68,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A0FF41A259748DC000F825B /* CartProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				8A0FF41B259748FB000F825B /* CartVCProtocols.swift */,
+			);
+			path = CartProtocols;
+			sourceTree = "<group>";
+		};
 		8A82F13E2595E20500D84A6D /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +141,7 @@
 		8AA5A6BB2594697200556B44 /* Routing */ = {
 			isa = PBXGroup;
 			children = (
+				8A0FF41F2597490B000F825B /* CartVCRouter.swift */,
 			);
 			path = Routing;
 			sourceTree = "<group>";
@@ -134,6 +149,7 @@
 		8AA5A6BC2594697F00556B44 /* CartModule */ = {
 			isa = PBXGroup;
 			children = (
+				8A0FF41A259748DC000F825B /* CartProtocols */,
 				8AA5A6BB2594697200556B44 /* Routing */,
 				8AA5A6BA2594696B00556B44 /* Entity */,
 				8AA5A6B92594696100556B44 /* Presenter */,
@@ -179,6 +195,7 @@
 				8A82F12A2595BDCD00D84A6D /* MenuVCCollectionViewCell.swift */,
 				8A82F1DB2596596200D84A6D /* PageViewController.swift */,
 				8A82F1CB25962EBC00D84A6D /* VerticalCell.swift */,
+				8A82F1E725966BE300D84A6D /* MenuItemCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AE3B3FA2592388A000E2708 /* LaunchScreen.storyboard in Resources */,
+				8A82F1E825966BE300D84A6D /* MenuItemCell.xib in Resources */,
 				8AE3B3F72592388A000E2708 /* Assets.xcassets in Resources */,
 				8AE3B3F525923888000E2708 /* Main.storyboard in Resources */,
 			);
@@ -371,9 +389,11 @@
 				8A82F12B2595BDCD00D84A6D /* MenuVCCollectionViewCell.swift in Sources */,
 				8AA5A6C525946AC900556B44 /* MenuVC.swift in Sources */,
 				8A82F13B2595DCEB00D84A6D /* SceneDelegate.swift in Sources */,
+				8A0FF41C259748FB000F825B /* CartVCProtocols.swift in Sources */,
 				8A82F1572595ED2300D84A6D /* NetworkAdapter.swift in Sources */,
 				8AE3B3EE25923888000E2708 /* AppDelegate.swift in Sources */,
 				8A82F1CC25962EBC00D84A6D /* VerticalCell.swift in Sources */,
+				8A0FF4202597490B000F825B /* CartVCRouter.swift in Sources */,
 				8AA5A6C825946B0800556B44 /* CartVC.swift in Sources */,
 				8AA5A6D225946B8100556B44 /* CartVCInteractor.swift in Sources */,
 				8A82F1772595FAAA00D84A6D /* MenuVCRouter.swift in Sources */,

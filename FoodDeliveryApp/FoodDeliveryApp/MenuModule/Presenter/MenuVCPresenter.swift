@@ -20,6 +20,10 @@ final class MenuVCPresenter: ViewToPresenterProtocol {
 
 extension MenuVCPresenter: InteractorToPresenterProtocol {
     
+    func showCartItems(items: [MenuVCModel]) {
+        view?.showCartItems(items: items)
+    }
+
     func fetchMenu(items: [MenuVCModel]) {
         view?.showMenu(items: items)
     }
@@ -27,4 +31,6 @@ extension MenuVCPresenter: InteractorToPresenterProtocol {
     func fetchMenuItemsFailed() {
         view?.showError()
     }
+    
+    
 }

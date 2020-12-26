@@ -9,9 +9,12 @@ import UIKit
 
 class CartVC: UIViewController {
 
+    var presenter: CartViewToPresenterProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        presenter?.updateView()
     }
     
 

@@ -6,3 +6,16 @@
 //
 
 import Foundation
+import ObjectMapper
+
+class CartVCInteractor: CartPresenterToInteractorProtocol {
+    
+    var presenter: CartInteractorToPresenterProtocol?
+    
+    func fetchMenuItems() {
+        // Network API here.
+        
+    }
+}
+
+
