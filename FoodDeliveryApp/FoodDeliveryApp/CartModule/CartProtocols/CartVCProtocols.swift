@@ -33,3 +33,11 @@ protocol CartViewToPresenterProtocol: class {
 protocol CartPresenterToRouterProtocol: class {
     static func createModule() -> UIViewController
 }
+
+protocol CartItemToCartVCProtocol {
+    func removeMenuItemfromCart(menuItemIdx: Int)
+}
+
+protocol CartVCToMenuVCProtocol {
+    func removeCartItems(items: [MenuVCModel])
+}

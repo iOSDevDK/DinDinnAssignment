@@ -14,8 +14,8 @@
             filePath = "FoodDeliveryApp/MenuModule/View/MenuVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "pageChanged(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "FoodDeliveryApp/MenuModule/View/MenuVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "viewSwipedLeft(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "FoodDeliveryApp/MenuModule/View/MenuVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "viewSwipedRight(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -55,17 +55,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "00E53045-3DAE-4F87-B239-BC4BE6321B69"
+            uuid = "1CC0CA09-DE4C-4571-AF27-3271F581946F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FoodDeliveryApp/MenuModule/View/MenuVC.swift"
+            filePath = "FoodDeliveryApp/CartModule/View/CartVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "setUpHorizontalButtons()"
-            landmarkType = "7">
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "arrCartItems"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

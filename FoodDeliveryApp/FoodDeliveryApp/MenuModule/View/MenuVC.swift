@@ -122,7 +122,16 @@ class MenuVC: UIViewController {
                 if let cartItems = sender as? [MenuVCModel] {
                     cartView.arrCartItems = cartItems
                 }
+                cartView.delegate = self
             }
+        }
+    }
+}
+
+extension MenuVC: CartVCToMenuVCProtocol {
+    func removeCartItems(items: [MenuVCModel]) {
+        if items.count == 0 {
+            arrCartItems.removeAll()
         }
     }
 }
